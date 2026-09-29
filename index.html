@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Future AI</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    background:#030508;
+    color:#00ffb3;
+    font-family:Consolas,monospace;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+body.glitch{
+    animation:shake .08s infinite;
+    filter:contrast(1.5);
+}
+
+.container{
+    width:92%;
+    max-width:520px;
+    padding:30px;
+    border:1px solid #00ffb355;
+    border-radius:20px;
+    background:#06100dcc;
+    box-shadow:
+        0 0 30px #00ffb322,
+        inset 0 0 30px #00ffb311;
+    position:relative;
+}
+
+.scanline{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 3px,
+        #00ffb305 4px
+    );
+}
+
+.logo{
+    font-size:14px;
+    letter-spacing:4px;
+    color:#aaa;
+}
+
+h1{
+    font-size:34px;
+    margin:15px 0;
+}
+
+.green{
+    color:#00ffb3;
+}
+
+.warning{
+    color:#ff405c;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    margin:15px 0;
+    background:#020605;
+    color:#00ffb3;
+    border:1px solid #00ffb366;
+    border-radius:8px;
+    outline:none;
+    font-family:inherit;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    border:0;
+    border-radius:8px;
+    background:#00ffb3;
+    color:#00130d;
+    font-family:inherit;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    box-shadow:0 0 20px #00ffb377;
+}
+
+#analysis,
+#countdown,
+#prediction,
+#final{
+    display:none;
+}
+
+#terminal{
+    min-height:170px;
+    margin-top:20px;
+    color:#a7ffe4;
+    line-height:1.7;
+}
+
+.progress{
+    height:5px;
+    background:#10251f;
+    margin-top:20px;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.bar{
+    height:100%;
+    width:0%;
+    background:#00ffb3;
+    transition:width .5s;
+}
+
+#number{
+    font-size:90px;
+    font-weight:bold;
+    text-align:center;
+    text-shadow:0 0 25px #00ffb3;
+}
+
+#prediction{
+    text-align:center;
+}
+
+.future{
+    border:1px solid #ff405c;
+    padding:20px;
+    border-radius:12px;
+    color:#ff7184;
+    margin-top:20px;
+}
+
+#final{
+    text-align:center;
+}
+
+.big{
+    font-size:70px;
+}
+
+#final h1{
+    color:white;
+}
+
+.reveal{
+    color:#00ffb3;
+    font-size:18px;
+    line-height:1.6;
+}
+
+@keyframes shake{
+    0%{transform:translate(2px,0)}
+    50%{transform:translate(-2px,1px)}
+    100%{transform:translate(1px,-1px)}
+}
+
+@media(max-width:500px){
+    .container{
+        padding:22px;
+    }
+
+    h1{
+        font-size:27px;
+    }
+
+    #number{
+        font-size:70px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="scanline"></div>
+
+<div class="container">
+
+    <div class="logo">
+        FUTURE-AI // EXPERIMENTAL SYSTEM
+    </div>
+
+    <!-- START -->
+    <section id="start">
+
+        <h1>
+            Predict Your<br>
+            <span class="green">Future.</span>
+        </h1>
+
+        <p>
+            An experimental AI system will analyze
+            your next 24 hours.
+        </p>
+
+        <input
+            id="name"
+            placeholder="Enter your name..."
+            autocomplete="off"
+        >
+
+        <button onclick="startAI()">
+            INITIALIZE AI
+        </button>
+
+    </section>
+
+
+    <!-- AI ANALYSIS -->
+    <section id="analysis">
+
+        <h1>AI ANALYSIS</h1>
+
+        <div id="terminal"></div>
+
+        <div class="progress">
+            <div class="bar" id="bar"></div>
+        </div>
+
+    </section>
+
+
+    <!-- COUNTDOWN -->
+    <section id="countdown">
+
+        <p class="warning">
+            ⚠ ANOMALY DETECTED
+        </p>
+
+        <h1>
+            Prediction locked.
+        </h1>
+
+        <p>
+            Revealing result in...
+        </p>
+
+        <div id="number">5</div>
+
+    </section>
+
+
+    <!-- PREDICTION -->
+    <section id="prediction">
+
+        <h1>RESULT FOUND</h1>
+
+        <div class="future">
+            <p id="predictionText"></p>
+        </div>
+
+        <p>
+            Probability: <b>97.8%</b>
+        </p>
+
+    </section>
+
+
+    <!-- FINAL -->
+    <section id="final">
+
+        <div class="big">😂</div>
+
+        <h1>
+            YOU GOT PRANKED!
+        </h1>
+
+        <p class="reveal">
+            There is no Future-AI.<br><br>
+
+            There was no prediction.<br>
+            No system was hacked.<br>
+            Nothing was collected.<br><br>
+
+            <b>
+                You literally trusted a random website
+                to predict your future. 💀
+            </b>
+        </p>
+
+        <button onclick="location.reload()">
+            TRY AGAIN
+        </button>
+
+    </section>
+
+</div>
+
+
+<script>
+
+let friendName = "";
+
+function startAI(){
+
+    friendName =
+        document.getElementById("name").value.trim();
+
+    if(!friendName){
+        alert("Enter your name first 😭");
+        return;
+    }
+
+    document.getElementById("start").style.display="none";
+    document.getElementById("analysis").style.display="block";
+
+    runAnalysis();
+}
+
+
+function runAnalysis(){
+
+    const terminal =
+        document.getElementById("terminal");
+
+    const bar =
+        document.getElementById("bar");
+
+    const messages = [
+
+        "Connecting to Future-AI...",
+        "Identifying subject: " + friendName,
+        "Analyzing behavioral patterns...",
+        "Scanning probability matrix...",
+        "Calculating next 24 hours...",
+        "Detecting unexpected event...",
+        "⚠ Something doesn't look right...",
+        "Finalizing prediction..."
+
+    ];
+
+    let i = 0;
+
+    function next(){
+
+        if(i >= messages.length){
+
+            setTimeout(startCountdown,700);
+            return;
+        }
+
+        terminal.innerHTML +=
+            "> " + messages[i] + "<br>";
+
+        bar.style.width =
+            ((i + 1) / messages.length * 100) + "%";
+
+        i++;
+
+        setTimeout(next,850);
+    }
+
+    next();
+}
+
+
+function startCountdown(){
+
+    document.getElementById("analysis").style.display="none";
+
+    document.getElementById("countdown").style.display="block";
+
+    let number = 5;
+
+    const counter =
+        document.getElementById("number");
+
+    let timer = setInterval(()=>{
+
+        number--;
+
+        counter.innerText = number;
+
+        if(number <= 0){
+
+            clearInterval(timer);
+
+            showPrediction();
+        }
+
+    },1000);
+}
+
+
+function showPrediction(){
+
+    document.getElementById("countdown").style.display="none";
+
+    document.getElementById("prediction").style.display="block";
+
+    const predictions = [
+
+        "At approximately 8:47 PM, you will realize that something is watching you... 👀",
+
+        "Within the next few minutes, someone will make you question what you just saw...",
+
+        "Your next unexpected event is already happening right now...",
+
+        "You are about to discover something you were NOT supposed to discover..."
+
+    ];
+
+    const random =
+        predictions[Math.floor(Math.random()*predictions.length)];
+
+    document.getElementById("predictionText").innerText =
+        friendName + ", " + random;
+
+    setTimeout(glitchReveal,5000);
+}
+
+
+function glitchReveal(){
+
+    document.body.classList.add("glitch");
+
+    setTimeout(()=>{
+
+        document.getElementById("prediction").style.display="none";
+
+        document.getElementById("final").style.display="block";
+
+        document.body.classList.remove("glitch");
+
+    },1500);
+}
+
+</script>
+
+</body>
+</html>
+```
